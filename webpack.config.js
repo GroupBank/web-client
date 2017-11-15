@@ -2,5 +2,19 @@ module.exports = {
   entry: './index.js',
   output: {
     filename: 'bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/, // look for any js files
+        exclude: /node_modules/,
+        use: { // run these for each file
+          loader: 'babel-loader',
+          options: {
+            presets: ['env'] // pass this option to babel
+          }
+        }
+      }
+    ]
   }
 };

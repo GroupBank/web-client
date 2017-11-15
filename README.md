@@ -4,6 +4,7 @@ tools:
     node.js: run js in the command-line
     npm: package manager for js libraries
     webpack: packs all js files into a single file, to speed up page loading (1 request)
+    babel: transpiles source written in modern js to previous versions supported by older browsers 
 
 files:
     package.json: config file for npm
