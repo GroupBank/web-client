@@ -70,13 +70,31 @@
 "use strict";
 
 
+var _settings = __webpack_require__(1);
+
+var settings = _interopRequireWildcard(_settings);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 console.log("Hello from JavaScript!");
 
-fetch("https://maps.googleapis.com/maps/api/geocode/json?address=Florence", {
+fetch(settings.url, {
     method: "GET"
 }).then(function (response) {
     console.log(response);
 });
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var url = exports.url = "https://maps.googleapis.com/maps/api/geocode/json?address=Florence";
 
 /***/ })
 /******/ ]);

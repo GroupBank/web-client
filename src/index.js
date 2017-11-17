@@ -1,6 +1,8 @@
+import * as settings from './settings';
+
 console.log("Hello from JavaScript!");
 
-fetch("https://maps.googleapis.com/maps/api/geocode/json?address=Florence", {
+fetch(settings.url, {
     method: "GET",
 }).then(function(response) {
     console.log(response);

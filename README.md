@@ -20,5 +20,7 @@ files:
     - webpack.config.js: config file for webpack
 
 
-helpful js intro link: https://italonascimento.github.io/configuring-a-basic-environment-for-javascript-development/
+helpful js intro links: 
 
+- https://italonascimento.github.io/configuring-a-basic-environment-for-javascript-development/
+- https://medium.com/@thejasonfile/a-simple-intro-to-javascript-imports-and-exports-389dd53c3fac
