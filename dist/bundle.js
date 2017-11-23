@@ -11046,7 +11046,19 @@ var bitcoin = _interopRequireWildcard(_bitcoinjsLib);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 console.log("Hello from JavaScript!");
-console.log("Here's your address: " + bitcoin.ECPair.makeRandom().toWIF());
+
+var myPair = bitcoin.ECPair.makeRandom();
+console.log("Here's your private key: " + myPair.toWIF());
+console.log("Here's your address: " + myPair.getAddress());
+
+var message = "My signed message";
+var messageHash = bitcoin.crypto.sha256(message);
+var messageSignature = myPair.sign(messageHash);
+
+console.log(myPair.verify(messageHash, messageSignature));
+
+var badMessage = "My bad message";
+console.log(myPair.verify(bitcoin.crypto.sha256(badMessage), messageSignature));
 
 fetch(settings.url, {
     method: "GET"
