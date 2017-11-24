@@ -1,20 +1,20 @@
 import * as settings from './settings';
-import * as bitcoin from 'bitcoinjs-lib';
+import * as crypto from './crypto';
 
 console.log("Hello from JavaScript!");
 
-const myPair = bitcoin.ECPair.makeRandom();
-console.log("Here's your private key: " + myPair.toWIF());
-console.log("Here's your address: " + myPair.getAddress());
+const my_key = crypto.generate_private_key();
+const my_address = crypto.address_from_private_key(my_key);
+console.log("Here's your private key: " + my_key);
+console.log("Here's your address: " + my_address);
 
 const message = "My signed message";
-const messageHash = bitcoin.crypto.sha256(message);
-const messageSignature = myPair.sign(messageHash);
+const message_signature = crypto.sign(message, my_key);
 
-console.log(myPair.verify(messageHash, messageSignature));
+console.log(crypto.verify(message, message_signature, my_key));
 
-const badMessage = "My bad message";
-console.log(myPair.verify(bitcoin.crypto.sha256(badMessage), messageSignature));
+const bad_message = "My bad message";
+console.log(crypto.verify(bad_message, message_signature, my_key));
 
 fetch(settings.url, {
     method: "GET",

@@ -11039,26 +11039,26 @@ var _settings = __webpack_require__(59);
 
 var settings = _interopRequireWildcard(_settings);
 
-var _bitcoinjsLib = __webpack_require__(60);
+var _crypto = __webpack_require__(115);
 
-var bitcoin = _interopRequireWildcard(_bitcoinjsLib);
+var crypto = _interopRequireWildcard(_crypto);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 console.log("Hello from JavaScript!");
 
-var myPair = bitcoin.ECPair.makeRandom();
-console.log("Here's your private key: " + myPair.toWIF());
-console.log("Here's your address: " + myPair.getAddress());
+var my_key = crypto.generate_private_key();
+var my_address = crypto.address_from_private_key(my_key);
+console.log("Here's your private key: " + my_key);
+console.log("Here's your address: " + my_address);
 
 var message = "My signed message";
-var messageHash = bitcoin.crypto.sha256(message);
-var messageSignature = myPair.sign(messageHash);
+var message_signature = crypto.sign(message, my_key);
 
-console.log(myPair.verify(messageHash, messageSignature));
+console.log(crypto.verify(message, message_signature, my_key));
 
-var badMessage = "My bad message";
-console.log(myPair.verify(bitcoin.crypto.sha256(badMessage), messageSignature));
+var bad_message = "My bad message";
+console.log(crypto.verify(bad_message, message_signature, my_key));
 
 fetch(settings.url, {
     method: "GET"
@@ -15738,6 +15738,48 @@ TransactionBuilder.prototype.__overMaximumFees = function (bytes) {
 
 module.exports = TransactionBuilder
 
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.generate_private_key = generate_private_key;
+exports.address_from_private_key = address_from_private_key;
+exports.sign = sign;
+exports.verify = verify;
+
+var _bitcoinjsLib = __webpack_require__(60);
+
+var bitcoin = _interopRequireWildcard(_bitcoinjsLib);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function generate_private_key() {
+    return bitcoin.ECPair.makeRandom().toWIF();
+}
+
+function address_from_private_key(private_key) {
+    var key_pair = bitcoin.ECPair.fromWIF(private_key);
+    return key_pair.getAddress();
+}
+
+function sign(message, private_key) {
+    var key_pair = bitcoin.ECPair.fromWIF(private_key);
+    var message_hash = bitcoin.crypto.sha256(message);
+    return key_pair.sign(message_hash);
+}
+
+function verify(message, signature, private_key) {
+    var key_pair = bitcoin.ECPair.fromWIF(private_key);
+    var message_hash = bitcoin.crypto.sha256(message);
+    return key_pair.verify(message_hash, signature);
+}
 
 /***/ })
 /******/ ]);
