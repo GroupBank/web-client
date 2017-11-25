@@ -1,5 +1,5 @@
-import * as settings from './settings';
-import * as crypto from './crypto';
+import * as settings from '@/settings';
+import * as crypto from '@/crypto';
 
 console.log("Hello from JavaScript!");
 

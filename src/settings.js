@@ -1,1 +1,1 @@
-export const url = "https://maps.googleapis.com/maps/api/geocode/json?address=Florence";
+export const test_url = "https://www.reddit.com/r/dataisbeautiful/comments/.json";
