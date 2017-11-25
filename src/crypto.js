@@ -1,7 +1,13 @@
 import * as bitcoin from 'bitcoinjs-lib';
+import BigInteger from 'bigi';
 
 export function generate_private_key() {
     return bitcoin.ECPair.makeRandom().toWIF();
+}
+
+export function public_key_from_private_key(private_key) {
+    const key_pair = bitcoin.ECPair.fromWIF(private_key);
+    return BigInteger.fromBuffer(key_pair.getPublicKeyBuffer());
 }
 
 export function address_from_private_key(private_key) {
