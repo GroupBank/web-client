@@ -18,7 +18,7 @@ console.log(crypto.verify(message, message_signature, my_key));
 const bad_message = "My bad message";
 console.log(crypto.verify(bad_message, message_signature, my_key));
 
-fetch(settings.test_url, { 
+fetch(settings.test_url, {
     method: "GET", 
 }).then( (response) => {
     return response.text()

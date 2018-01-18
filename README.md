@@ -24,3 +24,4 @@ helpful js intro links:
 
 - https://italonascimento.github.io/configuring-a-basic-environment-for-javascript-development/
 - https://medium.com/@thejasonfile/a-simple-intro-to-javascript-imports-and-exports-389dd53c3fac
+- https://alexjoverm.github.io/2017/10/07/Enhance-Jest-configuration-with-Module-Aliases/
